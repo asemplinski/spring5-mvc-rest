@@ -125,8 +125,8 @@
 	<distributionManagement>
 		<repository>
 			<id>central</id>
-			<name>artifactory-releases</name>
-			<url>http://200.69.69.75:8081/artifactory/libs-release</url>
+			<name>libs-release</name>
+			<url>https://artifactory:8081/artifactory/libs-release</url>
 		</repository>
 	</distributionManagement>
 
