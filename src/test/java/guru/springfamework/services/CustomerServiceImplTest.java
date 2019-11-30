@@ -15,6 +15,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import static org.junit.Assert.*;
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyLong;
 import static org.mockito.Mockito.when;
 
@@ -81,4 +82,28 @@ public class CustomerServiceImplTest {
 
 
     }
+
+    @Test
+    public void createCustomer(){
+        //given
+        CustomerDTO customerDTO = new CustomerDTO();
+        customerDTO.setFirstName("Alex");
+        customerDTO.setLastName("Semplinski");
+        customerDTO.setId(69L);
+
+        Customer savedCustomer = new Customer();
+        savedCustomer.setFirstName(customerDTO.getFirstName());
+        savedCustomer.setLastName(customerDTO.getLastName());
+        savedCustomer.setId(customerDTO.getId());
+        savedCustomer.buildURL();
+
+        //when
+
+        when(customerRepository.save(any())).thenReturn(savedCustomer);
+        CustomerDTO returnedDTO = customerService.createNewCustomer(customerDTO);
+        //then
+
+        assertEquals("/api/v1/customers/69", returnedDTO.getUrl());
+    }
+
 }
